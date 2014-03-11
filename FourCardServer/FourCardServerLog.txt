@@ -1,0 +1,184 @@
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::start > ¼­¹ö ½ÃÀÛ
+Server::Server > ¼­¹ö Á¾·á
+Server::start > ¼­¹ö ½ÃÀÛ
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. \ü¹
+FourCardServer::onRead > 127.0.0.1, Ðù¹
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. @ø¹
+Server::start > ¼ÒÄÏ ¹ÙÀÎµå ½ÇÆÐ (10048)
+Server::end > Accept ½º·¹µå Á¾·á ´ë±â ½ÇÆÐ (6)
+Server::end > Accept ½º·¹µå Á¾·á ½ÇÆÐ (6)
+Server::end > ¼­¹ö Á¾·á
+Server::start > ¼­¹ö ½ÃÀÛ
+Server::end > ¼­¹ö Á¾·á
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ´÷
+FourCardServer::onRead > 127.0.0.1, (õ
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. ˜ó
+Server::Thread_IOCP > ¤úÙ, IO_SEND? ... id = -858993460, size = -858993460
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. $û
+FourCardServer::onRead > 127.0.0.1, ˜ø
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. ÷
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. 4ü
+FourCardServer::onRead > 127.0.0.1, ¨ù
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. ø
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. 4úW
+FourCardServer::onRead > 127.0.0.1, ¨÷W
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. öW
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. Üø
+FourCardServer::onRead > 127.0.0.1, Pö
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. Àô
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ý
+FourCardServer::onRead > 127.0.0.1, ˆú
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. øø
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. €ù"
+FourCardServer::onRead > 127.0.0.1, id = 1, size = 20, 4ö"
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ù+
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. 0ùÒ
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. Hû•
+FourCardServer::onRead > 127.0.0.1, id = 1, size = 20, ü÷•
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. Hýâ
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ¤ù
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ìøú
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. èù
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ´õ<
+FourCardServer::onRead > 127.0.0.1, id = 1, size = 20, cocos2d, 3
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. xñ<
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. Ø÷ÿ
+FourCardServer::onRead > 127.0.0.1, id = 1, size = 20, cocos2d, 3
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ¤üô
+FourCardServer::onRead > 127.0.0.1, id = 1, size = 20, cocos2d, 3
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. høô
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ¤üô
+FourCardServer::onRead > 127.0.0.1, id = 1, size = 20, cocos2d, 3
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. høô
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+Server::end > ¼­¹ö Á¾·á
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. ¬ó×
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 204.204.204.204
+Server::end > ¼­¹ö Á¾·á
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ½ÇÆÐ (0)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 204.204.204.204
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ø
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. ô
+FourCardServer::onClose > 204.204.204.204
