@@ -107,11 +107,10 @@ bool MainScene::init()
 	menu_game_start->setPosition(layer_game_start->getContentSize().width / 2, layer_game_start->getContentSize().height / 2);
 	
 	menuItem_game_start = MenuItemImage::create("sprites/main/game_start.png", "sprites/main/game_start.png", [] (Object* pSender) {
-		Packet packet(1);
-		packet << "cocos2d" << 3;
-		FourCard::client->sync_send(packet);
-		FourCard::client->sync_recv(packet);
-		cocos2d::log("%s", packet.toString("s4").c_str());
+		vector<string> queue_user_list;
+		queue_user_list.push_back(FourCard::user.id);
+
+		Director::getInstance()->replaceScene(GameQueueScene::createScene(PROTOCOL_GAME_QUEUE_ENQUEUE_RANDOM, queue_user_list));
 	});
 	
 	LabelTTF* label_game_start = LabelTTF::create("게임 시작", "", 20.0f, menuItem_game_start->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);

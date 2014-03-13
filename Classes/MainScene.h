@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "FourCard.h"
+#include "GameQueueScene.h"
 
 USING_NS_CC;
 

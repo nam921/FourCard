@@ -10,7 +10,7 @@ bool MainContentMainLayer::init()
     }
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    Point origin = Director::getInstance()->getVisibleOrigin();glEnable(GL_BLEND);
+    Point origin = Director::getInstance()->getVisibleOrigin();
 
 	Sprite* sprite_logo = Sprite::create("sprites/main/logo.png");
 	sprite_logo->setPosition(visibleSize.width / 2, 411.0f);

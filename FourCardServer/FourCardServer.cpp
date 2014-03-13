@@ -1,7 +1,4 @@
 #include "FourCardServer.h"
-//?쒖갹??媛쒗듃濡ㅻ윭
-
-//hanc is real troller
 
 FourCardServer::FourCardServer(void) : m_file_log("FourCardServerLog.txt", ios::app)
 {
@@ -13,7 +10,7 @@ FourCardServer::~FourCardServer(void)
 	m_mysql.disconnect();
 }
 
-ClientData* FourCardServer::onAccept(SOCKET socket) // onAccept 상태에서는 m_socket이 초기화되지않은 상태 입니다. 바꿀까? 안됨 ㅎㅇㅋㅋ
+ClientData* FourCardServer::onAccept(SOCKET socket) // onAccept 상태에서는 m_socket이 초기화되지않은 상태 입니다.
 {
 	m_file_log << stringf("FourCardServer::onAccept > %s", getIPFromSocket(socket)) << endl;
 	

@@ -1,5 +1,4 @@
 #include "LoginScene.h"
-#include "SplashScene.h"
 
 Scene* LoginScene::createScene()
 {
