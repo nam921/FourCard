@@ -11,6 +11,8 @@ class FourCardServer : public Server
 private:
 	MySQL m_mysql;
 	ofstream m_file_log;
+	list<user> users;
+	
 public:
 	FourCardServer(void);
 	virtual ~FourCardServer(void);
