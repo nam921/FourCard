@@ -3,6 +3,7 @@
 #include "FourCardServerProtocol.h"
 #include <fstream>
 #include "Protocol.h"
+#include "rank.h"
 
 USING_NS_REALIZE;
 
@@ -12,8 +13,11 @@ private:
 	MySQL m_mysql;
 	ofstream m_file_log;
 	list<user> users;
+	list<Rank> m_rank;
 	
 public:
+	
+
 	FourCardServer(void);
 	virtual ~FourCardServer(void);
 

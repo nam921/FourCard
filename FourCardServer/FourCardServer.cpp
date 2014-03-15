@@ -16,8 +16,9 @@ FourCardServer::FourCardServer(void) : m_file_log("FourCardServerLog.txt", ios::
 	}*/
 
 	users = m_mysql.sql_result("SELECT * FROM user");
-	for(auto it = users.begin(); it != users.end(); it++) 
-		m_file_log << it->id << it->pw << it->nick << it->elo_normal << it->elo_rank << endl;
+	for(auto it = users.begin(); it != users.end(); it++)
+		m_file_log << it->id << it->pw << it->nick << it->elo_normal << it->elo_rank << it->win << it->lose << endl;
+	
 
 	/*
 	map<string, string> query_result;
@@ -229,7 +230,7 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 
 			else{
 				packet<<PROTOCOL_REGISTER_SUCCESS;
-				user us = {map_user["id"], map_user["pw"], map_user["nick"], 1200, 1200, 0};
+				user us = {map_user["id"], map_user["pw"], map_user["nick"], 1200, 1200, 0, 0, 0};
 				users.push_back(us);
 			}
 
@@ -271,6 +272,17 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 
 	case Protocol::RANK_TOTAL:
 		{
+			
+			m_rank.clear();
+			for(auto it = users.begin(); it != users.end(); it++){
+				Rank rank = {it->nick, it->win, it->lose};
+				m_rank.push_back(rank);
+			}
+
+			packet.clear();
+			packet << "rank clear complete";
+
+			this->async_send((ClientData*) client_data, packet);
 			break;
 		}
 
