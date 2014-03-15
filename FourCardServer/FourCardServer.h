@@ -14,6 +14,7 @@ private:
 	ofstream m_file_log;
 	list<user> users;
 	list<Rank> m_rank;
+	HANDLE m_refresh;
 	
 public:
 	
@@ -29,4 +30,7 @@ public:
 	virtual void onError(const char* message);
 	virtual void onWarning(const char* message);
 	virtual void onLog(const char* message);
+	
+	static unsigned int __stdcall refresh(void*);
+	void prefresh();
 };

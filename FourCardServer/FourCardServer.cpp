@@ -1,12 +1,35 @@
 #include "FourCardServer.h"
 #include <regex>
+#include <thread>
 
 //hanc is real troller
+unsigned int __stdcall FourCardServer::refresh(void *parameter){
+	FourCardServer* server = (FourCardServer*) parameter;
+
+	while(1){
+		if(server->is_running()){
+			server->m_rank.clear();
+			for(auto it = server->users.begin(); it != server->users.end(); it++){
+					Rank rank = {it->nick, it->win, it->lose};
+					server->m_rank.push_back(rank);
+			}
+			server->m_file_log<<"rank refresh complete"<<endl;
+		}
+			Sleep(10800000);
+		
+	}
+	
+	return 0;
+}
+
 
 FourCardServer::FourCardServer(void) : m_file_log("FourCardServerLog.txt", ios::app)
 {
 	if(!m_mysql.connect("127.0.0.1", "root", "", "fourcard", 3306))
 	m_file_log << stringf("mysqlserver connect failed")<<endl;
+
+	Rank r={"",0,0};
+	m_rank.push_back(r);
 
 	/*
 	map<string, string> query_result;
@@ -18,6 +41,10 @@ FourCardServer::FourCardServer(void) : m_file_log("FourCardServerLog.txt", ios::
 	users = m_mysql.sql_result("SELECT * FROM user");
 	for(auto it = users.begin(); it != users.end(); it++)
 		m_file_log << it->id << it->pw << it->nick << it->elo_normal << it->elo_rank << it->win << it->lose << endl;
+
+	m_refresh = (HANDLE)_beginthreadex(NULL, 0, FourCardServer::refresh, this, 0, NULL);
+	
+	
 	
 
 	/*
@@ -47,6 +74,7 @@ FourCardServer::FourCardServer(void) : m_file_log("FourCardServerLog.txt", ios::
 
 
 }
+
 
 FourCardServer::~FourCardServer(void)
 {
@@ -105,6 +133,25 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 			break;
 		}
 	case Protocol::DB_RESULT:
+		{
+			string query;
+			packet >> query;
+
+			map<string, string> query_result;
+			m_mysql.result(query.c_str(), query_result);
+
+			packet.clear();
+			packet << (int32_t) query_result.size();
+
+			for(auto it = query_result.begin(); it != query_result.end(); it++) {
+				packet << it->first << it->second;
+			}
+
+			this->async_send((ClientData*) client_data, packet);
+
+			break;
+		}
+	case Protocol::DB_RESULT_ROWS:
 		{
 			string query;
 			packet >> query;
@@ -272,32 +319,152 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 
 	case Protocol::RANK_TOTAL:
 		{
+			string temp;
+			packet >> temp;
 			
-			m_rank.clear();
-			for(auto it = users.begin(); it != users.end(); it++){
-				Rank rank = {it->nick, it->win, it->lose};
-				m_rank.push_back(rank);
+			int32_t* tot = new int32_t[m_rank.size()];
+			string* nick = new string[m_rank.size()];
+
+			int size=0;
+			
+			for(auto it = m_rank.begin(); it != m_rank.end(); it++, size++){
+				tot[size]=it->win+it->lose;
+				nick[size]=it->nickname;
 			}
+			
+			
+			int32_t tmp;
+			string rank="";
+			for(int i=size-1; i>=0; i--)
+				for(int j=0; j<i; j++)
+					if(tot[j]<tot[j+1]){
+						tmp=tot[j];
+						tot[j]=tot[j+1];
+						tot[j+1]=tmp;
 
+						temp=nick[j];
+						nick[j]=nick[j+1];
+						nick[j+1]=temp;
+					}
+			
+			char Temp[30]="";
+			int gofor = size<=10?size:10;
+
+			for(int i=0; i<gofor; i++){
+				sprintf(Temp, "%s - %d\n",  nick[i].c_str(), tot[i]);
+				rank+=(Temp);
+			}
+			
 			packet.clear();
-			packet << "rank clear complete";
-
+			packet << rank;
+			delete[] tot;
 			this->async_send((ClientData*) client_data, packet);
+
+
+
+			
 			break;
 		}
 
 	case Protocol::RANK_WIN:
 		{
+			string temp;
+			packet >> temp;
+			
+			int32_t* win = new int32_t[m_rank.size()];
+			string* nick = new string[m_rank.size()];
+
+			int size=0;
+			
+			for(auto it = m_rank.begin(); it != m_rank.end(); it++, size++){
+				win[size]=it->win;
+				nick[size]=it->nickname;
+			}
+			
+			
+			int32_t tmp;
+			string rank="";
+			for(int i=size-1; i>=0; i--)
+				for(int j=0; j<i; j++)
+					if(win[j]<win[j+1]){
+						tmp=win[j];
+						win[j]=win[j+1];
+						win[j+1]=tmp;
+
+						temp=nick[j];
+						nick[j]=nick[j+1];
+						nick[j+1]=temp;
+					}
+			
+			char Temp[30]="";
+			int gofor = size<=10?size:10;
+
+			for(int i=0; i<gofor; i++){
+				sprintf(Temp, "%s - %d\n",  nick[i].c_str(), win[i]);
+				rank+=(Temp);
+			}
+			
+			packet.clear();
+			packet << rank;
+			delete[] win;
+			this->async_send((ClientData*) client_data, packet);
+			
 			break;
 		}
 
 	case Protocol::RANK_WINRATE:
 		{
+			string temp;
+			packet >> temp;
+			
+			double* winrate = new double[m_rank.size()];
+			string* nick = new string[m_rank.size()];
+
+			int size=0;
+			
+			for(auto it = m_rank.begin(); it != m_rank.end(); it++){
+				if(it->win>30){
+					winrate[size]=100/((double)(it->lose+it->win)/it->win);
+					nick[size]=it->nickname;
+					size++;
+				}
+			}
+			
+			
+			double tmp;
+			string rank="";
+			for(int i=size-1; i>=0; i--)
+				for(int j=0; j<i; j++)
+					if(winrate[j]<winrate[j+1]){
+						tmp=winrate[j];
+						winrate[j]=winrate[j+1];
+						winrate[j+1]=tmp;
+
+						temp=nick[j];
+						nick[j]=nick[j+1];
+						nick[j+1]=temp;
+					}
+			
+			char Temp[30]="";
+			int gofor = size<=10?size:10;
+
+			for(int i=0; i<gofor; i++){
+				sprintf(Temp, "%s - %.2lf\n",  nick[i].c_str(), winrate[i]);
+				rank+=(Temp);
+			}
+			
+			packet.clear();
+			packet << rank;
+			delete[] winrate;
+			this->async_send((ClientData*) client_data, packet);
 			break;
 		}
 
 	case Protocol::VERSION:
 		{
+			string temp;
+			packet >> temp;
+
 			packet.clear();
 			packet<<"9.0";
 
