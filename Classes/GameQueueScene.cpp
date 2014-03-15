@@ -1,6 +1,6 @@
 #include "GameQueueScene.h"
 
-Scene* GameQueueScene::createScene(int32_t queue_type, const vector<string>& queue_user_list)
+Scene* GameQueueScene::createScene(int32_t queue_type, const list<string>& queue_user_list)
 {
 
     // 'scene' is an autorelease object

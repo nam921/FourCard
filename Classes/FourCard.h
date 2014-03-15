@@ -9,6 +9,8 @@ USING_NS_CC;
 
 namespace FourCard
 {
+	extern const int VERSION;
+
 	extern const char* SERVER_IP;
 	extern const int SERVER_PORT;
 

@@ -2,6 +2,7 @@
 #define __MAIN_CONTENT_LAYERS_H__
 
 #include "cocos2d.h"
+#include "User.h"
 
 USING_NS_CC;
 

@@ -12,13 +12,15 @@ bool MainContentMainLayer::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
+	User logged_in_user = User::getLoggedInUser();
+
 	Sprite* sprite_logo = Sprite::create("sprites/main/logo.png");
 	sprite_logo->setPosition(visibleSize.width / 2, 411.0f);
 	sprite_logo->setAnchorPoint(Point(0.5f, 0.0f));
 
 	this->addChild(sprite_logo);
 
-	LabelTTF* label_name = LabelTTF::create("Babdo", "", 16.0f);
+	LabelTTF* label_name = LabelTTF::create(logged_in_user.m_nickname, "", 16.0f);
 	label_name->setPosition(135.0f, 369.0f);
 	label_name->setAnchorPoint(Point(0.0f, 0.0f));
 	label_name->setColor(Color3B(0,0,0));
@@ -31,7 +33,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_name_box);
 
-	LabelTTF* label_record_total = LabelTTF::create("1024 전", "", 16.0f);
+	LabelTTF* label_record_total = LabelTTF::create(stringf("%d", logged_in_user.m_win + logged_in_user.m_lose), "", 16.0f);
 	label_record_total->setPosition(135.0f, 324.0f);
 	label_record_total->setAnchorPoint(Point(0.0f, 0.0f));
 	label_record_total->setColor(Color3B(0,0,0));
@@ -44,7 +46,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_record_total_box);
 
-	LabelTTF* label_record_win = LabelTTF::create("300 승", "", 16.0f);
+	LabelTTF* label_record_win = LabelTTF::create(stringf("%d", logged_in_user.m_win), "", 16.0f);
 	label_record_win->setPosition(211.0f, 324.0f);
 	label_record_win->setAnchorPoint(Point(0.0f, 0.0f));
 	label_record_win->setColor(Color3B(0,0,0));
@@ -57,7 +59,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_record_win_box);
 
-	LabelTTF* label_record_lose = LabelTTF::create("724 패", "", 16.0f);
+	LabelTTF* label_record_lose = LabelTTF::create(stringf("%d", logged_in_user.m_lose), "", 16.0f);
 	label_record_lose->setPosition(286.0f, 324.0f);
 	label_record_lose->setAnchorPoint(Point(0.0f, 0.0f));
 	label_record_lose->setColor(Color3B(0,0,0));
@@ -70,7 +72,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_record_lose_box);
 
-	LabelTTF* label_rate = LabelTTF::create("당신의 승률 29%", "", 30.0f, Size(visibleSize.width, 44.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	LabelTTF* label_rate = LabelTTF::create(stringf("당신의 승률 %d%", (int) ((double) logged_in_user.m_win / (logged_in_user.m_win + logged_in_user.m_lose) * 100.0)), "", 30.0f, Size(visibleSize.width, 44.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_rate->setPosition(0.0f, 255.0f);
 	label_rate->setAnchorPoint(Point(0.0f, 0.0f));
 	label_rate->setHorizontalAlignment(TextHAlignment::CENTER);
@@ -587,7 +589,16 @@ bool MainContentInfoLayer::init()
 
 	this->addChild(sprite_logo);
 
-	LabelTTF* label_version_current = LabelTTF::create("현재버전   v.0.1", "", 20.0f, Size(visibleSize.width, 27.0f), TextHAlignment::CENTER);
+	int current_version = FourCard::VERSION;
+	int32_t latest_version = current_version;
+
+	Packet packet((int32_t) Protocol::VERSION);
+	FourCard::client->sync_send(packet);
+	if(FourCard::client->sync_recv(packet)) {
+		packet >> latest_version;
+	}
+
+	LabelTTF* label_version_current = LabelTTF::create(stringf("현재버전   v.%3d", current_version).c_str(), "", 20.0f, Size(visibleSize.width, 27.0f), TextHAlignment::CENTER);
 	label_version_current->setPosition(0.0f, 265.0f);
 	label_version_current->setContentSize(Size(visibleSize.width, 27.0f));
 	label_version_current->setAnchorPoint(Point(0.0f, 0.0f));
@@ -595,7 +606,7 @@ bool MainContentInfoLayer::init()
 
 	this->addChild(label_version_current);
 
-	LabelTTF* label_version_latest = LabelTTF::create("최신버전   v.0.2", "", 20.0f, Size(visibleSize.width, 27.0f), TextHAlignment::CENTER);
+	LabelTTF* label_version_latest = LabelTTF::create(stringf("최신버전   v.%3d", latest_version).c_str(), "", 20.0f, Size(visibleSize.width, 27.0f), TextHAlignment::CENTER);
 	label_version_latest->setPosition(0.0f, 215.0f);
 	label_version_latest->setContentSize(Size(visibleSize.width, 27.0f));
 	label_version_latest->setAnchorPoint(Point(0.0f, 0.0f));
@@ -606,6 +617,9 @@ bool MainContentInfoLayer::init()
 	MenuItemImage* menuItem_update = MenuItemImage::create("sprites/main/info/update.png", "sprites/main/info/update.png", [] (Object* pSender) {
 	});
 	menuItem_update->setAnchorPoint(Point(0.5f, 0.0f));
+	if(current_version >= latest_version) {
+		menuItem_update->setEnabled(false);
+	}
 
 	LabelTTF* label_update = LabelTTF::create("업데이트", "", 20.0f, menuItem_update->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_update->setPosition(menuItem_update->getContentSize().width / 2, menuItem_update->getContentSize().height / 2);

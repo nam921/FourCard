@@ -1,6 +1,6 @@
 #pragma once
 
-enum class Protocol
+enum class Protocol : int32_t
 {
 	// Send : 쿼리(string)
 	// Receive : 결과값 없음(null)

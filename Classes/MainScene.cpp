@@ -105,13 +105,101 @@ bool MainScene::init()
 
 	menu_game_start = Menu::create();
 	menu_game_start->setPosition(layer_game_start->getContentSize().width / 2, layer_game_start->getContentSize().height / 2);
+	menu_game_start->setContentSize(Size(371.0f, 74.0f));
 	
-	menuItem_game_start = MenuItemImage::create("sprites/main/game_start.png", "sprites/main/game_start.png", [] (Object* pSender) {
-		vector<string> queue_user_list;
-		queue_user_list.push_back(FourCard::user.id);
-
-		Director::getInstance()->replaceScene(GameQueueScene::createScene(PROTOCOL_GAME_QUEUE_ENQUEUE_RANDOM, queue_user_list));
+	menuItem_game_start_create_room = MenuItemImage::create("sprites/main/game_start_button.png", "sprites/main/game_start_button.png", [] (Object* pSender) {
 	});
+	menuItem_game_start_create_room->setPosition(0.0f, 0.0f);
+	
+	LabelTTF* label_game_start_create_room = LabelTTF::create("방 만들기", "", 20.0f, menuItem_game_start->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	label_game_start_create_room->setPosition(menuItem_game_start_create_room->getContentSize().width / 2, menuItem_game_start_create_room->getContentSize().height / 2);
+	label_game_start_create_room->setColor(Color3B(255, 255, 255));
+
+	menuItem_game_start_create_room->addChild(label_game_start_create_room);
+
+	menu_game_start->addChild(menuItem_game_start_create_room);
+
+	menuItem_game_start = MenuItemImage::create("sprites/main/game_start_button.png", "sprites/main/game_start_button.png", [=] (Object* pSender) {
+		Dialog* dialog = Dialog::create();
+
+		Layer* layer_queue_select = Layer::create();
+		layer_queue_select->setContentSize(Size(211.0f, 100.0f));
+
+		Menu* menu_queue_select = Menu::create();
+		menu_queue_select->setContentSize(layer_queue_select->getContentSize());
+
+		LabelTTF* label_queue_select_normal = LabelTTF::create("일반", "", 30.0f, Size(100.0f, 100.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		label_queue_select_normal->setAnchorPoint(Point(0.0f, 0.0f));
+		label_queue_select_normal->setColor(Color3B(255, 255, 255));
+
+		MenuItemLabel* menuItem_queue_select_normal = MenuItemLabel::create(label_queue_select_normal, [=] (Object* pSender) {
+			list<string> queue_user_list;
+			queue_user_list.push_back(User::getLoggedInUser().m_id);
+
+			Director::getInstance()->replaceScene(GameQueueScene::createScene(PROTOCOL_GAME_QUEUE_ENQUEUE_NORMAL, queue_user_list));
+
+			this->removeChild(dialog);
+		});
+		menuItem_queue_select_normal->setPosition(0.0f, 0.0f);
+		menuItem_queue_select_normal->setAnchorPoint(Point(0.0f, 0.0f));
+
+		DrawObject* draw_queue_select_normal = DrawObject::create();
+		draw_queue_select_normal->setOnDraw([=] () {
+			DrawPrimitives::drawSolidRect(Point(0.0f, 0.0f), Point(draw_queue_select_normal->getContentSize()), Color4F(Color3B(115, 162, 191)));
+		});
+		draw_queue_select_normal->setContentSize(label_queue_select_normal->getContentSize());
+
+		menuItem_queue_select_normal->addChild(draw_queue_select_normal);
+
+		menu_queue_select->addChild(menuItem_queue_select_normal);
+
+		DrawObject* draw_queue_select_seperator = DrawObject::create();
+		draw_queue_select_seperator->setOnDraw([] () {
+			DrawPrimitives::setDrawColor4B(127, 127, 127, 255);
+			DrawPrimitives::drawLine(Point(110.0f, 15.0f), Point(110.0f, 85.0f));
+		});
+		draw_queue_select_seperator->setContentSize(Size(1.0f, 70.0f));
+
+		menu_queue_select->addChild(draw_queue_select_seperator);
+
+		LabelTTF* label_queue_select_rank = LabelTTF::create("랭크", "", 30.0f, Size(100.0f, 100.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		label_queue_select_rank->setAnchorPoint(Point(0.0f, 0.0f));
+		label_queue_select_rank->setColor(Color3B(255, 255, 255));
+
+		MenuItemLabel* menuItem_queue_select_rank = MenuItemLabel::create(label_queue_select_rank, [=] (Object* pSender) {
+			list<string> queue_user_list;
+			queue_user_list.push_back(User::getLoggedInUser().m_id);
+
+			Director::getInstance()->replaceScene(GameQueueScene::createScene(PROTOCOL_GAME_QUEUE_ENQUEUE_RANK, queue_user_list));
+
+			this->removeChild(dialog);
+		});
+		menuItem_queue_select_rank->setPosition(111.0f, 0.0f);
+		menuItem_queue_select_rank->setAnchorPoint(Point(0.0f, 0.0f));
+
+		DrawObject* draw_queue_select_rank = DrawObject::create();
+		draw_queue_select_normal->setOnDraw([=] () {
+			DrawPrimitives::drawSolidRect(Point(0.0f, 0.0f), Point(draw_queue_select_rank->getContentSize()), Color4F(Color3B(224, 135, 135)));
+		});
+		draw_queue_select_rank->setContentSize(label_queue_select_rank->getContentSize());
+
+		menuItem_queue_select_rank->addChild(draw_queue_select_rank);
+
+		menu_queue_select->addChild(menuItem_queue_select_rank);
+
+		layer_queue_select->addChild(menu_queue_select);
+
+		dialog->setTitle("게임 대기열 종류 선택");
+		dialog->setMessage("");
+		dialog->setLayer(layer_queue_select);
+		dialog->addButton("확인", [=] () {
+			this->removeChild(dialog);
+		});
+		dialog->updateLayout();
+
+		this->addChild(dialog);
+	});
+	menuItem_game_start->setPosition(191.0f, 0.0f);
 	
 	LabelTTF* label_game_start = LabelTTF::create("게임 시작", "", 20.0f, menuItem_game_start->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_game_start->setPosition(menuItem_game_start->getContentSize().width / 2, menuItem_game_start->getContentSize().height / 2);

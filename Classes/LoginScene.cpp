@@ -62,8 +62,39 @@ bool LoginScene::init()
 	LabelTTF* label_login = LabelTTF::create("로그인", "", 20.0f, Size(298.0f, 54.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_login->setColor(Color3B(255, 255, 255));
 
-	MenuItemLabel* menuItem_login = MenuItemLabel::create(label_login, [] (Object* pSender) {
-		Director::getInstance()->replaceScene(SplashScene::createScene());
+	MenuItemLabel* menuItem_login = MenuItemLabel::create(label_login, [=] (Object* pSender) {
+		string id = editBox_id->getText();
+		string password = editBox_password->getText();
+
+		editBox_password->setText("");
+
+		Packet packet((int32_t) Protocol::LOGIN);
+		packet << id << password;
+
+		FourCard::client->sync_send(packet);
+		if(FourCard::client->sync_recv(packet)) {
+			int32_t result;
+			packet >> result;
+
+			if(result == PROTOCOL_LOGIN_SUCCESS) {
+				User::setLoggedInUser(id);
+				Director::getInstance()->replaceScene(SplashScene::createScene());
+			}
+			else if(result == PROTOCOL_LOGIN_FAIL) {
+				string message;
+				packet >> message;
+
+				Dialog* dialog = Dialog::create();
+				dialog->setTitle("로그인");
+				dialog->setMessage(stringf("로그인에 실패했습니다.\n%s", message.c_str()).c_str());
+				dialog->addButton("확인", [=] () {
+					this->removeChild(dialog);
+				});
+				dialog->updateLayout();
+
+				this->addChild(dialog);
+			}
+		}
 	});
 	menuItem_login->setContentSize(Size(298.0f, 54.0f));
 	menuItem_login->setPosition(Point(149.0f, 27.0f));
@@ -177,7 +208,7 @@ bool LoginScene::init()
 
 	EditBox* editBox_register_name = EditBox::create(Size(197.0f, 24.0f), Scale9Sprite::create("sprites/login/register/normal_box.png"));
 	editBox_register_name->setFont("", 15);
-	editBox_register_name->setPlaceHolder("2 ~ 14자");
+	editBox_register_name->setPlaceHolder("2 ~ 14바이트");
 	editBox_register_name->setPosition(Point(113.0f, 221.0f));
 	editBox_register_name->setAnchorPoint(Point(0.0f, 0.0f));
 	editBox_register_name->setFontColor(Color3B(60, 60, 60));
