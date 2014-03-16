@@ -1,3 +1,4 @@
+#pragma once
 enum FourCardPacket
 {
 	LOGIN = 1,
