@@ -34,7 +34,7 @@ bool LoginScene::init()
 	this->addChild(sprite_logo);
 
 	EditBox* editBox_id = EditBox::create(Size(298.0f, 54.0f), Scale9Sprite::create("sprites/login/edit_box.png"));
-	editBox_id->setFont("", 16);
+	editBox_id->setFont(FourCard::DEFAULT_FONT, 16);
 	editBox_id->setPlaceHolder("아이디");
 	editBox_id->setPosition(Point(visibleSize.width / 2, 458.0f));
 	editBox_id->setAnchorPoint(Point(0.5f, 0.0f));
@@ -47,7 +47,7 @@ bool LoginScene::init()
 	this->addChild(editBox_id);
 
 	EditBox* editBox_password = EditBox::create(Size(298.0f, 54.0f), Scale9Sprite::create("sprites/login/edit_box.png"));
-	editBox_password->setFont("", 16);
+	editBox_password->setFont(FourCard::DEFAULT_FONT, 16);
 	editBox_password->setPlaceHolder("비밀번호");
 	editBox_password->setPosition(Point(visibleSize.width / 2, 390.0f));
 	editBox_password->setAnchorPoint(Point(0.5f, 0.0f));
@@ -59,7 +59,7 @@ bool LoginScene::init()
 	
 	this->addChild(editBox_password);
 
-	LabelTTF* label_login = LabelTTF::create("로그인", "", 20.0f, Size(298.0f, 54.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	LabelTTF* label_login = LabelTTF::create("로그인", FourCard::DEFAULT_FONT, 20.0f, Size(298.0f, 54.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_login->setColor(Color3B(255, 255, 255));
 
 	MenuItemLabel* menuItem_login = MenuItemLabel::create(label_login, [=] (Object* pSender) {
@@ -71,8 +71,8 @@ bool LoginScene::init()
 		Packet packet((int32_t) Protocol::LOGIN);
 		packet << id << password;
 
-		FourCard::client->sync_send(packet);
-		if(FourCard::client->sync_recv(packet)) {
+		FourCardClient::getInstance()->sync_send(packet);
+		if(FourCardClient::getInstance()->sync_recv(packet)) {
 			int32_t result;
 			packet >> result;
 
@@ -86,7 +86,7 @@ bool LoginScene::init()
 
 				Dialog* dialog = Dialog::create();
 				dialog->setTitle("로그인");
-				dialog->setMessage(stringf("로그인에 실패했습니다.\n%s", message.c_str()).c_str());
+				dialog->setMessage(__stringf("로그인에 실패했습니다.\n%s", message.c_str()).c_str());
 				dialog->addButton("확인", [=] () {
 					this->removeChild(dialog);
 				});
@@ -139,7 +139,7 @@ bool LoginScene::init()
 
 	layer_register->addChild(sprite_register_background);
 
-	LabelTTF* label = LabelTTF::create("아이디 *", "", 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
+	LabelTTF* label = LabelTTF::create("아이디 *", FourCard::DEFAULT_FONT, 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
 	label->setPosition(0.0f, 359.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -147,7 +147,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_id = EditBox::create(Size(197.0f, 24.0f), Scale9Sprite::create("sprites/login/register/normal_box.png"));
-	editBox_register_id->setFont("", 15);
+	editBox_register_id->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_id->setPlaceHolder("4 ~ 14자의 영어, 숫자 사용");
 	editBox_register_id->setPosition(Point(113.0f, 359.0f));
 	editBox_register_id->setAnchorPoint(Point(0.0f, 0.0f));
@@ -159,7 +159,7 @@ bool LoginScene::init()
 
 	layer_register->addChild(editBox_register_id);
 
-	label = LabelTTF::create("비밀번호 *", "", 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
+	label = LabelTTF::create("비밀번호 *", FourCard::DEFAULT_FONT, 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
 	label->setPosition(0.0f, 313.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -167,7 +167,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_password = EditBox::create(Size(197.0f, 24.0f), Scale9Sprite::create("sprites/login/register/normal_box.png"));
-	editBox_register_password->setFont("", 15);
+	editBox_register_password->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_password->setPlaceHolder("4 ~ 14자의 영어, 숫자, 특수문자 사용");
 	editBox_register_password->setPosition(Point(113.0f, 313.0f));
 	editBox_register_password->setAnchorPoint(Point(0.0f, 0.0f));
@@ -179,7 +179,7 @@ bool LoginScene::init()
 	
 	layer_register->addChild(editBox_register_password);
 
-	label = LabelTTF::create("비밀번호 확인 *", "", 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
+	label = LabelTTF::create("비밀번호 확인 *", FourCard::DEFAULT_FONT, 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
 	label->setPosition(0.0f, 267.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -187,7 +187,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_password_check = EditBox::create(Size(197.0f, 24.0f), Scale9Sprite::create("sprites/login/register/normal_box.png"));
-	editBox_register_password_check->setFont("", 15);
+	editBox_register_password_check->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_password_check->setPlaceHolder("비밀번호 다시 입력");
 	editBox_register_password_check->setPosition(Point(113.0f, 267.0f));
 	editBox_register_password_check->setAnchorPoint(Point(0.0f, 0.0f));
@@ -199,7 +199,7 @@ bool LoginScene::init()
 
 	layer_register->addChild(editBox_register_password_check);
 
-	label = LabelTTF::create("별명 *", "", 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
+	label = LabelTTF::create("별명 *", FourCard::DEFAULT_FONT, 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
 	label->setPosition(0.0f, 221.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -207,7 +207,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_name = EditBox::create(Size(197.0f, 24.0f), Scale9Sprite::create("sprites/login/register/normal_box.png"));
-	editBox_register_name->setFont("", 15);
+	editBox_register_name->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_name->setPlaceHolder("2 ~ 14바이트");
 	editBox_register_name->setPosition(Point(113.0f, 221.0f));
 	editBox_register_name->setAnchorPoint(Point(0.0f, 0.0f));
@@ -219,7 +219,7 @@ bool LoginScene::init()
 
 	layer_register->addChild(editBox_register_name);
 
-	label = LabelTTF::create("이메일 *", "", 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
+	label = LabelTTF::create("이메일 *", FourCard::DEFAULT_FONT, 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
 	label->setPosition(0.0f, 175.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -227,7 +227,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_email = EditBox::create(Size(197.0f, 24.0f), Scale9Sprite::create("sprites/login/register/normal_box.png"));
-	editBox_register_email->setFont("", 15);
+	editBox_register_email->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_email->setPlaceHolder("");
 	editBox_register_email->setPosition(Point(113.0f, 175.0f));
 	editBox_register_email->setAnchorPoint(Point(0.0f, 0.0f));
@@ -239,7 +239,7 @@ bool LoginScene::init()
 
 	layer_register->addChild(editBox_register_email);
 
-	label = LabelTTF::create("주소", "", 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
+	label = LabelTTF::create("주소", FourCard::DEFAULT_FONT, 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
 	label->setPosition(0.0f, 129.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -247,7 +247,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_address = EditBox::create(Size(197.0f, 24.0f), Scale9Sprite::create("sprites/login/register/normal_box.png"));
-	editBox_register_address->setFont("", 15);
+	editBox_register_address->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_address->setPlaceHolder("도로명주소 입력");
 	editBox_register_address->setPosition(Point(113.0f, 129.0f));
 	editBox_register_address->setAnchorPoint(Point(0.0f, 0.0f));
@@ -259,7 +259,7 @@ bool LoginScene::init()
 
 	layer_register->addChild(editBox_register_address);
 
-	label = LabelTTF::create("연락처", "", 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
+	label = LabelTTF::create("연락처", FourCard::DEFAULT_FONT, 15.0f, Size(113.0f, 24.0f), TextHAlignment::RIGHT, TextVAlignment::CENTER);
 	label->setPosition(0.0f, 83.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -267,7 +267,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_phone_1 = EditBox::create(Size(50.0f, 24.0f), Scale9Sprite::create("sprites/login/register/phone_box_1.png"));
-	editBox_register_phone_1->setFont("", 15);
+	editBox_register_phone_1->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_phone_1->setPlaceHolder("");
 	editBox_register_phone_1->setPosition(Point(113.0f, 83.0f));
 	editBox_register_phone_1->setAnchorPoint(Point(0.0f, 0.0f));
@@ -279,7 +279,7 @@ bool LoginScene::init()
 
 	layer_register->addChild(editBox_register_phone_1);
 
-	label = LabelTTF::create("-", "", 15.0f, Size(15.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	label = LabelTTF::create("-", FourCard::DEFAULT_FONT, 15.0f, Size(15.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label->setPosition(163.0f, 83.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -287,7 +287,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_phone_2 = EditBox::create(Size(58.0f, 24.0f), Scale9Sprite::create("sprites/login/register/phone_box_2.png"));
-	editBox_register_phone_2->setFont("", 15);
+	editBox_register_phone_2->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_phone_2->setPlaceHolder("");
 	editBox_register_phone_2->setPosition(Point(178.0f, 83.0f));
 	editBox_register_phone_2->setAnchorPoint(Point(0.0f, 0.0f));
@@ -299,7 +299,7 @@ bool LoginScene::init()
 
 	layer_register->addChild(editBox_register_phone_2);
 
-	label = LabelTTF::create("-", "", 15.0f, Size(17.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	label = LabelTTF::create("-", FourCard::DEFAULT_FONT, 15.0f, Size(17.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label->setPosition(236.0f, 83.0f);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(60, 60, 60));
@@ -307,7 +307,7 @@ bool LoginScene::init()
 	layer_register->addChild(label);
 
 	EditBox* editBox_register_phone_3 = EditBox::create(Size(58.0f, 24.0f), Scale9Sprite::create("sprites/login/register/phone_box_3.png"));
-	editBox_register_phone_3->setFont("", 15);
+	editBox_register_phone_3->setFont(FourCard::DEFAULT_FONT, 15);
 	editBox_register_phone_3->setPlaceHolder("");
 	editBox_register_phone_3->setPosition(Point(253.0f, 83.0f));
 	editBox_register_phone_3->setAnchorPoint(Point(0.0f, 0.0f));
@@ -324,7 +324,7 @@ bool LoginScene::init()
 	menuItem_register_ok->setPosition(0.0f, 0.0f);
 	menuItem_register_ok->setAnchorPoint(Point(0.0f, 0.0f));
 
-	label = LabelTTF::create("가입", "", 20.0f, menuItem_register_ok->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	label = LabelTTF::create("가입", FourCard::DEFAULT_FONT, 20.0f, menuItem_register_ok->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(255, 255, 255));
 
@@ -336,7 +336,7 @@ bool LoginScene::init()
 	menuItem_register_cancel->setPosition(162.0f, 0.0f);
 	menuItem_register_cancel->setAnchorPoint(Point(0.0f, 0.0f));
 
-	label = LabelTTF::create("취소", "", 20.0f, menuItem_register_cancel->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	label = LabelTTF::create("취소", FourCard::DEFAULT_FONT, 20.0f, menuItem_register_cancel->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label->setAnchorPoint(Point(0.0f, 0.0f));
 	label->setColor(Color3B(255, 255, 255));
 
@@ -349,7 +349,7 @@ bool LoginScene::init()
 	layer_register->addChild(menu_register_ok_cancel);
 	layer_register->retain();
 
-	MenuItemLabel* menuItem_register = MenuItemLabel::create(LabelTTF::create("회원가입", "", 15.0f, Size(218.0f, 20.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
+	MenuItemLabel* menuItem_register = MenuItemLabel::create(LabelTTF::create("회원가입", FourCard::DEFAULT_FONT, 15.0f, Size(218.0f, 20.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
 		this->addChild(this->layer_register);
 	});
 	menuItem_register->setPosition(0.0f, 0.0f);
@@ -362,10 +362,18 @@ bool LoginScene::init()
 
 	this->addChild(menu_register);
 
+	this->scheduleUpdate();
+
     return true;
 }
 
 LoginScene::~LoginScene()
 {
 	layer_register->release();
+}
+
+void LoginScene::update(float dt)
+{
+	FourCardClient::getInstance()->connect(FourCard::SERVER_IP, FourCard::SERVER_PORT);
+	this->unscheduleUpdate();
 }

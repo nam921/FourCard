@@ -7,6 +7,7 @@
 #include "FourCard.h"
 #include "Dialog.h"
 #include "User.h"
+#include "FourCardClient.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -24,6 +25,8 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(LoginScene);
+
+	virtual void update(float dt) override;
 
 	~LoginScene();
 };

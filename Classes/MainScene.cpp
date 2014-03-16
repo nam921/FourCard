@@ -111,7 +111,7 @@ bool MainScene::init()
 	});
 	menuItem_game_start_create_room->setPosition(0.0f, 0.0f);
 	
-	LabelTTF* label_game_start_create_room = LabelTTF::create("방 만들기", "", 20.0f, menuItem_game_start->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	LabelTTF* label_game_start_create_room = LabelTTF::create("방 만들기", FourCard::DEFAULT_FONT, 20.0f, menuItem_game_start->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_game_start_create_room->setPosition(menuItem_game_start_create_room->getContentSize().width / 2, menuItem_game_start_create_room->getContentSize().height / 2);
 	label_game_start_create_room->setColor(Color3B(255, 255, 255));
 
@@ -128,7 +128,7 @@ bool MainScene::init()
 		Menu* menu_queue_select = Menu::create();
 		menu_queue_select->setContentSize(layer_queue_select->getContentSize());
 
-		LabelTTF* label_queue_select_normal = LabelTTF::create("일반", "", 30.0f, Size(100.0f, 100.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_queue_select_normal = LabelTTF::create("일반", FourCard::DEFAULT_FONT, 30.0f, Size(100.0f, 100.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_queue_select_normal->setAnchorPoint(Point(0.0f, 0.0f));
 		label_queue_select_normal->setColor(Color3B(255, 255, 255));
 
@@ -162,7 +162,7 @@ bool MainScene::init()
 
 		menu_queue_select->addChild(draw_queue_select_seperator);
 
-		LabelTTF* label_queue_select_rank = LabelTTF::create("랭크", "", 30.0f, Size(100.0f, 100.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_queue_select_rank = LabelTTF::create("랭크", FourCard::DEFAULT_FONT, 30.0f, Size(100.0f, 100.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_queue_select_rank->setAnchorPoint(Point(0.0f, 0.0f));
 		label_queue_select_rank->setColor(Color3B(255, 255, 255));
 
@@ -201,7 +201,7 @@ bool MainScene::init()
 	});
 	menuItem_game_start->setPosition(191.0f, 0.0f);
 	
-	LabelTTF* label_game_start = LabelTTF::create("게임 시작", "", 20.0f, menuItem_game_start->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	LabelTTF* label_game_start = LabelTTF::create("게임 시작", FourCard::DEFAULT_FONT, 20.0f, menuItem_game_start->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_game_start->setPosition(menuItem_game_start->getContentSize().width / 2, menuItem_game_start->getContentSize().height / 2);
 	label_game_start->setColor(Color3B(255, 255, 255));
 

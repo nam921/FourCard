@@ -5,10 +5,10 @@ string User::s_logged_in_user_id = "";
 User User::getUser(string id)
 {
 	Packet packet((int32_t) Protocol::DB_RESULT);
-	packet << stringf("SELECT `id`, `nickname`, `win`, `lose` FROM `user` WHERE `id`='%s'", id.c_str());
+	packet << __stringf("SELECT `id`, `nickname`, `win`, `lose` FROM `user` WHERE `id`='%s'", id.c_str());
 
-	FourCard::client->sync_send(packet);
-	if(!FourCard::client->sync_recv(packet)) {
+	FourCardClient::getInstance()->sync_send(packet);
+	if(!FourCardClient::getInstance()->sync_recv(packet)) {
 		return User();
 	}
 

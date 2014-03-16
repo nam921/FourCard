@@ -20,7 +20,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_logo);
 
-	LabelTTF* label_name = LabelTTF::create(logged_in_user.m_nickname, "", 16.0f);
+	LabelTTF* label_name = LabelTTF::create(logged_in_user.m_nickname, FourCard::DEFAULT_FONT, 16.0f);
 	label_name->setPosition(135.0f, 369.0f);
 	label_name->setAnchorPoint(Point(0.0f, 0.0f));
 	label_name->setColor(Color3B(0,0,0));
@@ -33,7 +33,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_name_box);
 
-	LabelTTF* label_record_total = LabelTTF::create(stringf("%d", logged_in_user.m_win + logged_in_user.m_lose), "", 16.0f);
+	LabelTTF* label_record_total = LabelTTF::create(__stringf("%d", logged_in_user.m_win + logged_in_user.m_lose), FourCard::DEFAULT_FONT, 16.0f);
 	label_record_total->setPosition(135.0f, 324.0f);
 	label_record_total->setAnchorPoint(Point(0.0f, 0.0f));
 	label_record_total->setColor(Color3B(0,0,0));
@@ -46,7 +46,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_record_total_box);
 
-	LabelTTF* label_record_win = LabelTTF::create(stringf("%d", logged_in_user.m_win), "", 16.0f);
+	LabelTTF* label_record_win = LabelTTF::create(__stringf("%d", logged_in_user.m_win), FourCard::DEFAULT_FONT, 16.0f);
 	label_record_win->setPosition(211.0f, 324.0f);
 	label_record_win->setAnchorPoint(Point(0.0f, 0.0f));
 	label_record_win->setColor(Color3B(0,0,0));
@@ -59,7 +59,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_record_win_box);
 
-	LabelTTF* label_record_lose = LabelTTF::create(stringf("%d", logged_in_user.m_lose), "", 16.0f);
+	LabelTTF* label_record_lose = LabelTTF::create(__stringf("%d", logged_in_user.m_lose), FourCard::DEFAULT_FONT, 16.0f);
 	label_record_lose->setPosition(286.0f, 324.0f);
 	label_record_lose->setAnchorPoint(Point(0.0f, 0.0f));
 	label_record_lose->setColor(Color3B(0,0,0));
@@ -72,7 +72,7 @@ bool MainContentMainLayer::init()
 
 	this->addChild(sprite_record_lose_box);
 
-	LabelTTF* label_rate = LabelTTF::create(stringf("´ç½ÅÀÇ ½Â·ü %d%", (int) ((double) logged_in_user.m_win / (logged_in_user.m_win + logged_in_user.m_lose) * 100.0)), "", 30.0f, Size(visibleSize.width, 44.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	LabelTTF* label_rate = LabelTTF::create(__stringf("´ç½ÅÀÇ ½Â·ü %d%", (int) ((double) logged_in_user.m_win / (logged_in_user.m_win + logged_in_user.m_lose) * 100.0)), FourCard::DEFAULT_FONT, 30.0f, Size(visibleSize.width, 44.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_rate->setPosition(0.0f, 255.0f);
 	label_rate->setAnchorPoint(Point(0.0f, 0.0f));
 	label_rate->setHorizontalAlignment(TextHAlignment::CENTER);
@@ -101,7 +101,7 @@ bool MainContentRankLayer::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
-	menuItem_category_recent = MenuItemLabel::create(LabelTTF::create("ÃÖ±Ù", "", 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
+	menuItem_category_recent = MenuItemLabel::create(LabelTTF::create("ÃÖ±Ù", FourCard::DEFAULT_FONT, 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
 		this->changeLayer(menuItem_category_recent, 0);
 	});
 	menuItem_category_recent->setScale(1.0f);
@@ -110,7 +110,7 @@ bool MainContentRankLayer::init()
 	menuItem_category_recent->setColor(Color3B(140, 140, 140));
 	menuItem_category_recent->setDisabledColor(Color3B(60, 60, 60));
 
-	menuItem_category_winrate = MenuItemLabel::create(LabelTTF::create("½Â·ü", "", 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
+	menuItem_category_winrate = MenuItemLabel::create(LabelTTF::create("½Â·ü", FourCard::DEFAULT_FONT, 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
 		this->changeLayer(menuItem_category_winrate, 1);
 	});
 	menuItem_category_winrate->setPosition(88.0f, 0.0f);
@@ -118,7 +118,7 @@ bool MainContentRankLayer::init()
 	menuItem_category_winrate->setColor(Color3B(140, 140, 140));
 	menuItem_category_winrate->setDisabledColor(Color3B(60, 60, 60));
 
-	menuItem_category_win = MenuItemLabel::create(LabelTTF::create("´Ù½Â", "", 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
+	menuItem_category_win = MenuItemLabel::create(LabelTTF::create("´Ù½Â", FourCard::DEFAULT_FONT, 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
 		this->changeLayer(menuItem_category_win, 2);
 	});
 	menuItem_category_win->setPosition(176.0f, 0.0f);
@@ -126,7 +126,7 @@ bool MainContentRankLayer::init()
 	menuItem_category_win->setColor(Color3B(140, 140, 140));
 	menuItem_category_win->setDisabledColor(Color3B(60, 60, 60));
 
-	menuItem_category_lose = MenuItemLabel::create(LabelTTF::create("´ÙÆÐ", "", 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
+	menuItem_category_lose = MenuItemLabel::create(LabelTTF::create("´ÙÆÐ", FourCard::DEFAULT_FONT, 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
 		this->changeLayer(menuItem_category_lose, 3);
 	});
 	menuItem_category_lose->setPosition(264.0f, 0.0f);
@@ -134,7 +134,7 @@ bool MainContentRankLayer::init()
 	menuItem_category_lose->setColor(Color3B(140, 140, 140));
 	menuItem_category_lose->setDisabledColor(Color3B(60, 60, 60));
 
-	menuItem_category_total = MenuItemLabel::create(LabelTTF::create("´ÙÀü", "", 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
+	menuItem_category_total = MenuItemLabel::create(LabelTTF::create("´ÙÀü", FourCard::DEFAULT_FONT, 18.0f, Size(88.0f, 24.0f), TextHAlignment::CENTER, TextVAlignment::CENTER), [=] (Object* pSender) {
 		this->changeLayer(menuItem_category_total, 4);
 	});
 	menuItem_category_total->setPosition(352.0f, 0.0f);
@@ -174,7 +174,7 @@ bool MainContentRankLayer::init()
 		LayerColor* layer_rank_recent_item = LayerColor::create(layer_rank_recent_item_color_table[i], layer_rank_recent->getContentSize().width, 85.0f);
 		layer_rank_recent_item->setPosition(0.0f, 460.0f - 90.0f * i);
 
-		LabelTTF* label_rank = LabelTTF::create(String::createWithFormat("%dµî", i + 1)->getCString(), "", 30.0f, Size(70.0f, layer_rank_recent_item->getContentSize().height), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_rank = LabelTTF::create(__stringf("%dµî", i + 1).c_str(), FourCard::DEFAULT_FONT, 30.0f, Size(70.0f, layer_rank_recent_item->getContentSize().height), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_rank->setPosition(10.0f, 0.0f);
 		label_rank->setAnchorPoint(Point(0.0f, 0.0f));
 		label_rank->setColor(Color3B(60, 60, 60));
@@ -186,7 +186,7 @@ bool MainContentRankLayer::init()
 			layer_rank_recent_detail_item->setPosition(103.0f + 85.0f * j, 8.0f);
 			layer_rank_recent_detail_item->setContentSize(Size(60.0f, 69.0f));
 
-			LabelTTF* label_name = LabelTTF::create(String::createWithFormat("%d%d", i, j)->getCString(), "", 10.0f, Size(layer_rank_recent_detail_item->getContentSize().width, 14.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+			LabelTTF* label_name = LabelTTF::create(__stringf("%d%d", i, j).c_str(), FourCard::DEFAULT_FONT, 10.0f, Size(layer_rank_recent_detail_item->getContentSize().width, 14.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 			label_name->setPosition(0.0f, 55.0f);
 			label_name->setAnchorPoint(Point(0.0f, 0.0f));
 			label_name->setColor(i % 4 == j ? Color3B(60, 60, 60) : Color3B(255, 255, 255));
@@ -200,7 +200,7 @@ bool MainContentRankLayer::init()
 
 			layer_rank_recent_detail_item->addChild(sprite_user);
 
-			LabelTTF* label_score = LabelTTF::create(String::createWithFormat("%d%dÁ¡", i, j)->getCString(), "", 11.0f, Size(layer_rank_recent_detail_item->getContentSize().width, 15.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+			LabelTTF* label_score = LabelTTF::create(__stringf("%d%dÁ¡", i, j).c_str(), FourCard::DEFAULT_FONT, 11.0f, Size(layer_rank_recent_detail_item->getContentSize().width, 15.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 			label_score->setPosition(0.0f, 0.0f);
 			label_score->setAnchorPoint(Point(0.0f, 0.0f));
 			label_score->setColor(i % 4 == j ? Color3B(60, 60, 60) : Color3B(255, 255, 255));
@@ -219,21 +219,21 @@ bool MainContentRankLayer::init()
 	layer_rank_winrate->setContentSize(layer_rank_current->getContentSize());
 
 	for(int i=0; i<10; i++) {
-		LabelTTF* label_rank = LabelTTF::create(String::createWithFormat("%d", i + 1)->getCString(), "", 16.0f, Size(40.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_rank = LabelTTF::create(__stringf("%d", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(40.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_rank->setPosition(0.0f, 504.0f - 56.0f * i);
 		label_rank->setAnchorPoint(Point(0.0f, 0.0f));
 		label_rank->setColor(Color3B(60, 60, 60));
 
 		layer_rank_winrate->addChild(label_rank);
 
-		LabelTTF* label_name = LabelTTF::create(String::createWithFormat("%d", i + 1)->getCString(), "", 16.0f, Size(200.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_name = LabelTTF::create(__stringf("%d", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(200.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_name->setPosition(50.0f, 504.0f - 56.0f * i);
 		label_name->setAnchorPoint(Point(0.0f, 0.0f));
 		label_name->setColor(Color3B(60, 60, 60));
 
 		layer_rank_winrate->addChild(label_name);
 
-		LabelTTF* label_win = LabelTTF::create(String::createWithFormat("%d%%", i + 1)->getCString(), "", 16.0f, Size(170.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_win = LabelTTF::create(__stringf("%d%%", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(170.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_win->setPosition(260.0f, 504.0f - 56.0f * i);
 		label_win->setAnchorPoint(Point(0.0f, 0.0f));
 		label_win->setColor(Color3B(60, 60, 60));
@@ -247,21 +247,21 @@ bool MainContentRankLayer::init()
 	layer_rank_win->setContentSize(layer_rank_current->getContentSize());
 
 	for(int i=0; i<10; i++) {
-		LabelTTF* label_rank = LabelTTF::create(String::createWithFormat("%d", i + 1)->getCString(), "", 16.0f, Size(40.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_rank = LabelTTF::create(__stringf("%d", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(40.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_rank->setPosition(0.0f, 504.0f - 56.0f * i);
 		label_rank->setAnchorPoint(Point(0.0f, 0.0f));
 		label_rank->setColor(Color3B(60, 60, 60));
 
 		layer_rank_win->addChild(label_rank);
 
-		LabelTTF* label_name = LabelTTF::create(String::createWithFormat("%d", i + 1)->getCString(), "", 16.0f, Size(200.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_name = LabelTTF::create(__stringf("%d", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(200.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_name->setPosition(50.0f, 504.0f - 56.0f * i);
 		label_name->setAnchorPoint(Point(0.0f, 0.0f));
 		label_name->setColor(Color3B(60, 60, 60));
 
 		layer_rank_win->addChild(label_name);
 
-		LabelTTF* label_win = LabelTTF::create(String::createWithFormat("%d½Â", i + 1)->getCString(), "", 16.0f, Size(170.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_win = LabelTTF::create(__stringf("%d½Â", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(170.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_win->setPosition(260.0f, 504.0f - 56.0f * i);
 		label_win->setAnchorPoint(Point(0.0f, 0.0f));
 		label_win->setColor(Color3B(60, 60, 60));
@@ -275,21 +275,21 @@ bool MainContentRankLayer::init()
 	layer_rank_lose->setContentSize(layer_rank_current->getContentSize());
 
 	for(int i=0; i<10; i++) {
-		LabelTTF* label_rank = LabelTTF::create(String::createWithFormat("%d", i + 1)->getCString(), "", 16.0f, Size(40.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_rank = LabelTTF::create(__stringf("%d", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(40.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_rank->setPosition(0.0f, 504.0f - 56.0f * i);
 		label_rank->setAnchorPoint(Point(0.0f, 0.0f));
 		label_rank->setColor(Color3B(60, 60, 60));
 
 		layer_rank_lose->addChild(label_rank);
 
-		LabelTTF* label_name = LabelTTF::create(String::createWithFormat("%d", i + 1)->getCString(), "", 16.0f, Size(200.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_name = LabelTTF::create(__stringf("%d", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(200.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_name->setPosition(50.0f, 504.0f - 56.0f * i);
 		label_name->setAnchorPoint(Point(0.0f, 0.0f));
 		label_name->setColor(Color3B(60, 60, 60));
 
 		layer_rank_lose->addChild(label_name);
 
-		LabelTTF* label_win = LabelTTF::create(String::createWithFormat("%dÆÐ", i + 1)->getCString(), "", 16.0f, Size(170.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_win = LabelTTF::create(__stringf("%dÆÐ", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(170.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_win->setPosition(260.0f, 504.0f - 56.0f * i);
 		label_win->setAnchorPoint(Point(0.0f, 0.0f));
 		label_win->setColor(Color3B(60, 60, 60));
@@ -303,21 +303,21 @@ bool MainContentRankLayer::init()
 	layer_rank_total->setContentSize(layer_rank_current->getContentSize());
 
 	for(int i=0; i<10; i++) {
-		LabelTTF* label_rank = LabelTTF::create(String::createWithFormat("%d", i + 1)->getCString(), "", 16.0f, Size(40.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_rank = LabelTTF::create(__stringf("%d", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(40.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_rank->setPosition(0.0f, 504.0f - 56.0f * i);
 		label_rank->setAnchorPoint(Point(0.0f, 0.0f));
 		label_rank->setColor(Color3B(60, 60, 60));
 
 		layer_rank_total->addChild(label_rank);
 
-		LabelTTF* label_name = LabelTTF::create(String::createWithFormat("%d", i + 1)->getCString(), "", 16.0f, Size(200.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_name = LabelTTF::create(__stringf("%d", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(200.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_name->setPosition(50.0f, 504.0f - 56.0f * i);
 		label_name->setAnchorPoint(Point(0.0f, 0.0f));
 		label_name->setColor(Color3B(60, 60, 60));
 
 		layer_rank_total->addChild(label_name);
 
-		LabelTTF* label_win = LabelTTF::create(String::createWithFormat("%dÀü", i + 1)->getCString(), "", 16.0f, Size(170.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+		LabelTTF* label_win = LabelTTF::create(__stringf("%dÀü", i + 1).c_str(), FourCard::DEFAULT_FONT, 16.0f, Size(170.0f, 56.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 		label_win->setPosition(260.0f, 504.0f - 56.0f * i);
 		label_win->setAnchorPoint(Point(0.0f, 0.0f));
 		label_win->setColor(Color3B(60, 60, 60));
@@ -367,8 +367,7 @@ bool MainContentHelpLayer::init()
 	layer_page = Layer::create();
 
 	for(int i=0; i<page_count; i++) {
-		String* sprite_name = String::createWithFormat("sprites/main/help/page%d.png", i);
-		Sprite* sprite = Sprite::create(sprite_name->getCString());
+		Sprite* sprite = Sprite::create(__stringf("sprites/main/help/page%d.png", i).c_str());
 		sprite->setPosition(sprite->getContentSize().width * i, 0.0f);
 		sprite->setAnchorPoint(Point(0.0f, 0.0f));
 
@@ -593,12 +592,12 @@ bool MainContentInfoLayer::init()
 	int32_t latest_version = current_version;
 
 	Packet packet((int32_t) Protocol::VERSION);
-	FourCard::client->sync_send(packet);
-	if(FourCard::client->sync_recv(packet)) {
+	FourCardClient::getInstance()->sync_send(packet);
+	if(FourCardClient::getInstance()->sync_recv(packet)) {
 		packet >> latest_version;
 	}
 
-	LabelTTF* label_version_current = LabelTTF::create(stringf("ÇöÀç¹öÀü   v.%3d", current_version).c_str(), "", 20.0f, Size(visibleSize.width, 27.0f), TextHAlignment::CENTER);
+	LabelTTF* label_version_current = LabelTTF::create(__stringf("ÇöÀç¹öÀü   v.%3d", current_version).c_str(), FourCard::DEFAULT_FONT, 20.0f, Size(visibleSize.width, 27.0f), TextHAlignment::CENTER);
 	label_version_current->setPosition(0.0f, 265.0f);
 	label_version_current->setContentSize(Size(visibleSize.width, 27.0f));
 	label_version_current->setAnchorPoint(Point(0.0f, 0.0f));
@@ -606,7 +605,7 @@ bool MainContentInfoLayer::init()
 
 	this->addChild(label_version_current);
 
-	LabelTTF* label_version_latest = LabelTTF::create(stringf("ÃÖ½Å¹öÀü   v.%3d", latest_version).c_str(), "", 20.0f, Size(visibleSize.width, 27.0f), TextHAlignment::CENTER);
+	LabelTTF* label_version_latest = LabelTTF::create(__stringf("ÃÖ½Å¹öÀü   v.%3d", latest_version).c_str(), FourCard::DEFAULT_FONT, 20.0f, Size(visibleSize.width, 27.0f), TextHAlignment::CENTER);
 	label_version_latest->setPosition(0.0f, 215.0f);
 	label_version_latest->setContentSize(Size(visibleSize.width, 27.0f));
 	label_version_latest->setAnchorPoint(Point(0.0f, 0.0f));
@@ -621,7 +620,7 @@ bool MainContentInfoLayer::init()
 		menuItem_update->setEnabled(false);
 	}
 
-	LabelTTF* label_update = LabelTTF::create("¾÷µ¥ÀÌÆ®", "", 20.0f, menuItem_update->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	LabelTTF* label_update = LabelTTF::create("¾÷µ¥ÀÌÆ®", FourCard::DEFAULT_FONT, 20.0f, menuItem_update->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_update->setPosition(menuItem_update->getContentSize().width / 2, menuItem_update->getContentSize().height / 2);
 	label_update->setColor(Color3B(60, 60, 60));
 

@@ -1,11 +1,10 @@
 #ifndef __FOURCARD_H__
 #define __FOURCARD_H__
 
-#include "cocos2d.h"
-#include "FourCardClient.h"
-#include <fstream>
+#include <string>
+#include <cstdarg>
 
-USING_NS_CC;
+using namespace std;
 
 namespace FourCard
 {
@@ -14,10 +13,9 @@ namespace FourCard
 	extern const char* SERVER_IP;
 	extern const int SERVER_PORT;
 
-	extern FourCardClient* client;
-
-	void Initialize();
-	void Release();
+	extern const char* DEFAULT_FONT;
 }
+
+string __stringf(const char* format, ...);
 
 #endif // __FOURCARD_H__

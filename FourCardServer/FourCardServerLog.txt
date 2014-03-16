@@ -182,3 +182,6 @@ Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
 Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ø
 Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. ô
 FourCardServer::onClose > 204.204.204.204
+Server::start > ¼­¹ö ½ÃÀÛ
+Server::end > ¼­¹ö Á¾·á
+Server::start > ¼­¹ö ½ÃÀÛ

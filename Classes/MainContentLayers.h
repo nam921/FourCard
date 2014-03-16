@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "User.h"
+#include "FourCard.h"
+#include "FourCardClient.h"
 
 USING_NS_CC;
 

@@ -2,6 +2,7 @@
 #define __USER_H__
 
 #include "FourCard.h"
+#include "FourCardClient.h"
 
 using namespace std;
 

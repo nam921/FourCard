@@ -33,7 +33,7 @@ bool GameQueueScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
-	label_time = LabelTTF::create("00:00", "", 18.0f, Size(visibleSize.width, 680.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	label_time = LabelTTF::create("00:00", FourCard::DEFAULT_FONT, 18.0f, Size(visibleSize.width, 680.0f), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_time->setPosition(0.0f, 0.0f);
 	label_time->setContentSize(Size(visibleSize.width, 680.0f));
 	label_time->setAnchorPoint(Point(0.0f, 0.0f));
@@ -50,7 +50,7 @@ bool GameQueueScene::init()
 	MenuItemImage* menuItem_menu_dequeue = MenuItemImage::create("sprites/game/queue/button.png", "sprites/game/queue/button.png", [] (Object* pSender) {
 	});
 	
-	LabelTTF* label_menu_dequeue = LabelTTF::create("나가기", "", 18.0f, menuItem_menu_dequeue->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	LabelTTF* label_menu_dequeue = LabelTTF::create("나가기", FourCard::DEFAULT_FONT, 18.0f, menuItem_menu_dequeue->getContentSize(), TextHAlignment::CENTER, TextVAlignment::CENTER);
 	label_menu_dequeue->setPosition(menuItem_menu_dequeue->getContentSize().width / 2, menuItem_menu_dequeue->getContentSize().height / 2);
 	label_menu_dequeue->setColor(Color3B(255, 255, 255));
 

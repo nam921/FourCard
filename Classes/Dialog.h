@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "DrawObject.h"
+#include "FourCard.h"
 #include <functional>
 
 using namespace std;

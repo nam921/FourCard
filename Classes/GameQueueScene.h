@@ -3,11 +3,9 @@
 
 #include "cocos2d.h"
 #include "extensions/cocos-ext.h"
-#include <list>
-#include <thread>
-#include <string>
 #include "FourCard.h"
 #include "Dialog.h"
+#include "FourCardClient.h"
 
 using namespace std;
 
