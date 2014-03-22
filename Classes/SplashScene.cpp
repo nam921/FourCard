@@ -36,8 +36,7 @@ bool SplashScene::init()
 	animation->setDelayPerUnit(1.0f);
 
 	for(int i=1; i<=4; i++) {
-		String* sprite_name = String::createWithFormat("sprites/splash/%d.png", i);
-		animation->addSpriteFrameWithFile(sprite_name->getCString());
+		animation->addSpriteFrameWithFile(__stringf("sprites/splash/%d.png", i).c_str());
 	}
 
 	CallFunc* callFunc = CallFunc::create(std::bind(&SplashScene::onSplashFinished, this));

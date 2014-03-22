@@ -182,3 +182,85 @@ Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
 Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. ø
 Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. ô
 FourCardServer::onClose > 204.204.204.204
+mysqlserver connect failed
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+FourCardServer::onClose > 127.0.0.1
+mysqlserver connect failed
+Server::start > ¼ÒÄÏ ¹ÙÀÎµå ½ÇÆÐ (10048)
+Server::end > Accept ½º·¹µå Á¾·á ´ë±â ½ÇÆÐ (6)
+Server::end > Accept ½º·¹µå Á¾·á ½ÇÆÐ (6)
+Server::end > ¼­¹ö Á¾·á
+mysqlserver connect failed
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 127.0.0.1
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 127.0.0.1
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 127.0.0.1
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ÆÐÅ¶ ¹Þ±â ¼º°ø .. 0ýñ
+mysqlserver query failed
+MySQL server has gone away
+Server::async_send > 127.0.0.1, ÆÐÅ¶ Àü¼Û ¼º°ø .. ðöñ
+mysqlserver connect failed
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 127.0.0.1
+
+
+fourcard0
+id12
+pw
+user0
+Server::start > ¼ÒÄÏ ¹ÙÀÎµå ½ÇÆÐ (10048)
+Server::end > Accept ½º·¹µå Á¾·á ´ë±â ½ÇÆÐ (6)
+Server::end > Accept ½º·¹µå Á¾·á ½ÇÆÐ (6)
+Server::end > ¼­¹ö Á¾·á
+4size
+fourcard1200
+ideloelo
+pweo1234
+user1200
+Server::start > ¼­¹ö ½ÃÀÛ
+4size
+fourcard1200
+ideloelo
+pweo1234
+user1200
+Server::start > ¼­¹ö ½ÃÀÛ
+4size
+fourcard1200
+ideloelo
+pweo1234
+user1200
+Server::start > ¼­¹ö ½ÃÀÛ
+fourcard1200
+ideloelo
+pweo1234
+user12001
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 127.0.0.1
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 127.0.0.1
+Server::start > ¼­¹ö ½ÃÀÛ
+FourCardServer::onAccept > 127.0.0.1
+Server::Thread_Accept > 127.0.0.1, Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼º°ø
+Server::Thread_IOCP > 127.0.0.1, ¿¬°á ²÷±è (64)
+FourCardServer::onClose > 127.0.0.1

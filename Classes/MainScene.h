@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "FourCard.h"
+#include "GameQueueScene.h"
+#include "Dialog.h"
 
 USING_NS_CC;
 
@@ -17,7 +19,7 @@ private:
 	Layer *layer_content_main, *layer_content_rank, *layer_content_help, *layer_content_setting, *layer_content_info;
 	Layer *layer_game_start;
 	Menu* menu_game_start;
-	MenuItemImage* menuItem_game_start;
+	MenuItemImage *menuItem_game_start_create_room, *menuItem_game_start;
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
