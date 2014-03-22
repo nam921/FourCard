@@ -75,8 +75,26 @@ void GameQueueScene::update(float dt)
 
 	if(m_queue_packet_received) {
 		if(m_queue_status == PROTOCOL_GAME_QUEUE_ENQUEUE_SUCCESS) {
+			Dialog* dialog = Dialog::create();
+			dialog->setTitle("게임을 찾았습니다!");
+			dialog->setMessage("5초뒤 게임을 시작합니다.\n게임을 같이하는 플레이어 :\n");
+			dialog->addButton("5", [=] () {
+			});
+
+			this->addChild(dialog);
+
+			std::this_thread::sleep_for(chrono::seconds(5));
 		}
 		else if(m_queue_status == PROTOCOL_GAME_QUEUE_ENQUEUE_ERROR) {
+			Dialog* dialog = Dialog::create();
+			dialog->setTitle("대기열 참가 실패");
+			dialog->setMessage(__stringf("대기열 참가에 실패했습니다.\n%s", this->m_queue_error_message).c_str());
+			dialog->addButton("확인", [=] () {
+				this->removeChild(dialog);
+				Director::getInstance()->replaceScene(MainScene::createScene());
+			});
+
+			this->addChild(dialog);
 		}
 	}
 }

@@ -23,7 +23,7 @@ enum class Protocol : int32_t
 	// Todo : PROTOCOL_LOGIN_SUCCESS = 성공, PROTOCOL_LOGIN_FAIL = 실패
 	// Todo : 실패시 메시지를 보냅니다.
 	LOGIN,
-	// Send : 아이디(string)
+	// Send : 보내는 값 없음(null)
 	// Receive : 결과값 없음(null)
 	// Todo : 로그아웃을 처리합니다.
 	LOGOUT,

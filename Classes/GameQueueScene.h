@@ -6,6 +6,7 @@
 #include "FourCard.h"
 #include "Dialog.h"
 #include "FourCardClient.h"
+#include "MainScene.h"
 
 using namespace std;
 

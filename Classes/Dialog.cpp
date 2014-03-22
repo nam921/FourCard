@@ -113,7 +113,7 @@ void Dialog::updateLayout()
 		m_dialog->addChild(m_layer);
 	}
 
-	LabelTTF* label_message = LabelTTF::create(m_message, FourCard::DEFAULT_FONT, 18.0f, Size(240.0f, 0.0f), TextHAlignment::CENTER);
+	LabelTTF* label_message = LabelTTF::create(m_message, FourCard::DEFAULT_FONT, 15.0f, Size(240.0f, 0.0f), TextHAlignment::CENTER);
 	label_message->setPosition(15.0f, 63.0f + ((m_layer != nullptr) ? m_layer->getContentSize().height : 0));
 	label_message->setColor(Color3B(60, 60, 60));
 	label_message->setAnchorPoint(Point(0.0f, 0.0f));
@@ -121,7 +121,7 @@ void Dialog::updateLayout()
 	m_dialog->addChild(label_message);
 
 	DrawObject* draw_line_title = DrawObject::create();
-	draw_line_title->setPosition(15.0f, 63.0f + ((m_layer != nullptr) ? m_layer->getContentSize().height : 0) + label_message->getContentSize().height + 15.0f);
+	draw_line_title->setPosition(15.0f, 59.0f + ((m_layer != nullptr) ? m_layer->getContentSize().height : 0) + label_message->getContentSize().height + 15.0f);
 	draw_line_title->setContentSize(Size(240.0f, 1.0f));
 	draw_line_title->setOnDraw([=] () {
 		DrawPrimitives::setDrawColor4B(127, 127, 127, 255);
@@ -132,13 +132,13 @@ void Dialog::updateLayout()
 	m_dialog->addChild(draw_line_title);
 
 	LabelTTF* label_title = LabelTTF::create(m_title, FourCard::DEFAULT_FONT, 20.0f, Size(240.0f, 27.0f), TextHAlignment::LEFT, TextVAlignment::CENTER);
-	label_title->setPosition(15.0f, 78.0f + ((m_layer != nullptr) ? m_layer->getContentSize().height : 0) + label_message->getContentSize().height + 1.0f + 10.0f);
+	label_title->setPosition(15.0f, 74.0f + ((m_layer != nullptr) ? m_layer->getContentSize().height : 0) + label_message->getContentSize().height + 1.0f + 10.0f);
 	label_title->setColor(Color3B(60, 60, 60));
 	label_title->setAnchorPoint(Point(0.0f, 0.0f));
 
 	m_dialog->addChild(label_title);
 
-	m_dialog->setContentSize(Size(270.0f, 128.0f + ((m_layer != nullptr) ? m_layer->getContentSize().height : 0) + label_message->getContentSize().height));
+	m_dialog->setContentSize(Size(270.0f, 124.0f + ((m_layer != nullptr) ? m_layer->getContentSize().height : 0) + label_message->getContentSize().height));
 	m_dialog->setPosition((content_size.width - m_dialog->getContentSize().width) / 2, (content_size.height - m_dialog->getContentSize().height) / 2);
 
 	Scale9Sprite* sprite_background = Scale9Sprite::create(Rect(10, 10, 1, 1), "sprites/dialog/background.png");

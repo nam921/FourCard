@@ -4,10 +4,10 @@ namespace FourCard
 {
 	const int VERSION = 10;
 
-	const char* SERVER_IP = "127.0.0.1";
+	const char* SERVER_IP = "25.37.223.220";
 	const int SERVER_PORT = 5807;
 
-	const char* DEFAULT_FONT = "¸¼Àº °íµñ";
+	const char* DEFAULT_FONT = "³ª´®°íµñ";
 }
 
 string __stringf(const char* format, ...)
