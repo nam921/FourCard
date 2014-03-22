@@ -81,11 +81,13 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FourCardClientData.h" />
     <ClInclude Include="FourCardServer.h" />
     <ClInclude Include="FourCardServerProtocol.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Protocol.h" />
     <ClInclude Include="rank.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Realize\RealizeServer\RealizeServer.vcxproj">

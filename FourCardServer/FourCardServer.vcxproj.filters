@@ -38,5 +38,11 @@
     <ClInclude Include="rank.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="FourCardClientData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

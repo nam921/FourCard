@@ -4,6 +4,9 @@
 #include <fstream>
 #include "Protocol.h"
 #include "rank.h"
+#include "User.h"
+#include <thread>
+#include "FourCardClientData.h"
 
 USING_NS_REALIZE;
 
@@ -12,9 +15,9 @@ class FourCardServer : public Server
 private:
 	MySQL m_mysql;
 	ofstream m_file_log;
-	list<user> users;
+	list<User*> m_users;
 	list<Rank> m_rank;
-	HANDLE m_refresh;
+	thread m_refresh;
 	
 public:
 	
@@ -31,6 +34,5 @@ public:
 	virtual void onWarning(const char* message);
 	virtual void onLog(const char* message);
 	
-	static unsigned int __stdcall refresh(void*);
-	void prefresh();
+	static void refresh(FourCardServer*);
 };

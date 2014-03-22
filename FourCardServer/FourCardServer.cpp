@@ -2,77 +2,44 @@
 #include <regex>
 #include <thread>
 
+bool match_regex(TCHAR* strData, TCHAR* pattern){
+	string data(strData);
+	smatch regexMatchResult;
+	regex mPattern(pattern);
+	return regex_match(data, regexMatchResult, mPattern);
+}
+
 //hanc is real troller
-unsigned int __stdcall FourCardServer::refresh(void *parameter){
-	FourCardServer* server = (FourCardServer*) parameter;
+void FourCardServer::refresh(FourCardServer *server){
 
 	while(1){
 		if(server->is_running()){
-			server->m_rank.clear();
-			for(auto it = server->users.begin(); it != server->users.end(); it++){
-					Rank rank = {it->nick, it->win, it->lose};
-					server->m_rank.push_back(rank);
+			/*server->m_rank_win.clear();
+			vector<string> result;
+			// SQL을 사용하여 구현
+			server->m_mysql.result("SELECT `win`, `lose` FROM `user` order by win desc 0, 10;", result);
+			for(auto it=result.begin(); it!=result.end(); it++){
+				
+				server->m_rankwin.push_back();
 			}
-			server->m_file_log<<"rank refresh complete"<<endl;
+
+			for(auto it = result.begin(); it != result.end(); it++) {
+				
+				//packet << it->first << it->second;
+			}
+			server->m_file_log<<"rank refresh complete"<<endl;*/
 		}
-			Sleep(10800000);
-		
+		Sleep(10800000);
 	}
-	
-	return 0;
 }
 
 
 FourCardServer::FourCardServer(void) : m_file_log("FourCardServerLog.txt", ios::app)
 {
 	if(!m_mysql.connect("127.0.0.1", "root", "", "fourcard", 3306))
-	m_file_log << stringf("mysqlserver connect failed")<<endl;
+		m_file_log << stringf("mysqlserver connect failed")<<endl;
 
-	Rank r={"",0,0};
-	m_rank.push_back(r);
-
-	/*
-	map<string, string> query_result;
-	m_mysql.result("SELECT * FROM test", query_result);
-	for(auto it = query_result.begin(); it != query_result.end(); it++) {
-		m_file_log << it->first << it->second << endl;
-	}*/
-
-	users = m_mysql.sql_result("SELECT * FROM user");
-	for(auto it = users.begin(); it != users.end(); it++)
-		m_file_log << it->id << it->pw << it->nick << it->elo_normal << it->elo_rank << it->win << it->lose << endl;
-
-	m_refresh = (HANDLE)_beginthreadex(NULL, 0, FourCardServer::refresh, this, 0, NULL);
-	
-	
-	
-
-	/*
-	map<string, string> query_result;
-	m_mysql.result("select * from user", query_result);
-	m_mysql.result("user", query_result);
-
-
-
-	m_file_log<<query_result.size()<<"size"<<endl;
-
-	int i=0;
-	user temp;
-	for(auto it = query_result.begin(); it != query_result.end(); it++, i++){
-		
-
-		if(i%4==1){
-			user temp={it->first, "pw", 1200, 1200};
-			users.push_front(temp);
-		}
-	}
-
-	for(auto it = query_result.begin(); it != query_result.end(); it++) {
-		m_file_log << it->first<< it->second<<endl;
-	}*/
-
-
-
+	m_refresh = thread(bind(FourCardServer::refresh, this)); // std:thread 사용 그
 }
 
 
@@ -85,8 +52,9 @@ ClientData* FourCardServer::onAccept(SOCKET socket) // onAccept 상태에서는 m_soc
 {
 	m_file_log << stringf("FourCardServer::onAccept > %s", getIPFromSocket(socket)) << endl;
 	
-	ClientData* client_data = new ClientData;
-	client_data->m_socket = socket; // onAccept에서 아무런 행동을 수행하지 않을경우 이 줄은 삭제해도 됩니다.
+	FourCardClientData* client_data = new FourCardClientData;
+	client_data->m_socket = socket;
+	client_data->m_user = nullptr;
 
 	return client_data;
 }
@@ -100,11 +68,17 @@ void FourCardServer::onAcceptFailed(const ClientData* client_data)
 void FourCardServer::onClose(const ClientData* client_data)
 {
 	m_file_log << stringf("FourCardServer::onClose > %s", getIPFromSocket(client_data->m_socket)) << endl;
+
+	const FourCardClientData* client = reinterpret_cast<const FourCardClientData*>(client_data);
+	m_users.remove(client->m_user);
+
 	delete client_data;
 }
 
 void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 {
+	FourCardClientData* client = (FourCardClientData*) client_data;
+	
 	switch(packet.getID())
 	{
 	case Protocol::DB_QUERY:
@@ -156,14 +130,16 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 			string query;
 			packet >> query;
 
-			map<string, string> query_result;
+			vector<map<string, string>> query_result;
 			m_mysql.result(query.c_str(), query_result);
 
 			packet.clear();
 			packet << (int32_t) query_result.size();
 
 			for(auto it = query_result.begin(); it != query_result.end(); it++) {
-				packet << it->first << it->second;
+				for(auto it_col = it->begin(); it_col != it->end(); it_col++){
+					packet << it_col->first << it_col->second;
+				}
 			}
 
 			this->async_send((ClientData*) client_data, packet);
@@ -177,71 +153,50 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 			string pw;
 			packet >> id >> pw;
 			packet.clear();
-			int login=0;
 
-			string login_ID="";
-			string login_PW="";
+			if(id == "") {
+				packet << PROTOCOL_LOGIN_FAIL << "아이디를 입력해주세요.";
+			}
+			else {
+				vector<string> result;
 			
-			/*
-			string query;
-			query="SELECT * FROM `user` where `id` = \'"+id+"\'";
-			list<user> login_ID = m_mysql.sql_result(query.c_str());
+				m_mysql.result(stringf("SELECT `id`, `pw` FROM `user` where `id` = \'%s\'", id.c_str()).c_str(), result);
 
-			query="SELECT * FROM `user` where `pw` = \'"+pw+"\'";
-			list<user> login_PW = m_mysql.sql_result(query.c_str());*/
+				if(result.size()==0){
+					packet << PROTOCOL_LOGIN_FAIL << "존재하지 않는 아이디 입니다.";
+				}
 
-			for(auto it = users.begin(); it != users.end(); it++){
-				if(it->id==id){
-					if(it->pw==pw){
-						packet << "Login Complete";
-						if(it->login){
-							packet.clear();
-							packet << "login failed: already logined..";
-						}
-						else{
-							it->login=1;
-							login=1;
-						}
-					}else packet<<"login failed: invaild PW";
+
+				else if(result[0] == id) {
+					if(result[1] == pw) {
+						packet << PROTOCOL_LOGIN_SUCCESS;
+						User* user = new User;
+						// map을 사용해야 되는 이유 - 추가 / 삭제시 매우 불편함
+						vector<string> query_result;
+
+						m_mysql.result(stringf("SELECT `id`, `pw`, `nick`, `elo_normal`, `elo_rank`, `win`, `lose` FROM `user` WHERE `id` = \'%s\'", id.c_str()).c_str(), query_result);
+
+						//packet << (int32_t)query_result.size();
+						
+						
+						user->id = query_result[0];
+						user->pw = query_result[1];
+						user->nick = query_result[2];
+						user->elo_normal = atoi(query_result[3].c_str());
+						user->elo_rank = atoi(query_result[4].c_str());
+						user->win = atoi(query_result[5].c_str());
+						user->lose = atoi(query_result[6].c_str());
+
+						client->m_user=user;
+					}
+					else {
+						packet << PROTOCOL_LOGIN_FAIL << "비밀번호가 틀립니다.";
+					}
+				}
+				else {
+					packet << PROTOCOL_LOGIN_FAIL << "존재하지 않는 아이디 입니다.";
 				}
 			}
-
-			if(!login)packet<<"login failed: invaild ID";
-			
-
-
-			/*
-				if(login_ID.size()==0||login_PW.size()==0) packet << "Failed";
-				else{
-					auto it1 = login_ID.begin();
-					auto it2 = login_PW.begin();
-
-					if(login_ID==it2->id){
-						packet << "Login Complete: "+ it1->id;
-						for(auto it = users.begin(); it != users.end(); it++){
-						if(it->id==it1->id){
-							if(it->login)
-								login=1;
-						}
-					}
-					if(login){
-						packet.clear();
-						packet<< "login failed: already logined..";
-					}
-
-					
-					else{
-					for(auto it = users.begin(); it != users.end(); it++)
-						if(it->id==it1->id)
-							it->login=1;
-
-					}
-					}
-					
-				}*/
-			
-
-			
 
 			this->async_send((ClientData*) client_data, packet);
 			
@@ -254,7 +209,7 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 
 			int row;
 			packet >> row;
-
+			
 			for(int i=0; i<row; i++){
 				string column;
 				string value;
@@ -264,21 +219,48 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 				map_user[column] = value;
 			}
 			
-
-			m_mysql.insert("user", map_user);
-
 			packet.clear();
+			//packet << (int32_t)map_user.size();
+			
+			if(4 > map_user["id"].size() || 14 < map_user["id"].size()){
+				packet << PROTOCOL_REGISTER_FAIL << "아이디를 4-14자로 맞춰주세요.";
+			}
 
-			if(m_mysql.getErrno() != 0){
-				m_file_log << stringf("mysqlserver query failed")<<endl;
-				m_file_log << stringf(m_mysql.getError())<<endl;
-				packet<<PROTOCOL_REGISTER_FAIL;
+			else if(4 > map_user["pw"].size() || 14 < map_user["pw"].size()){
+				packet << PROTOCOL_REGISTER_FAIL << "비밀번호를 4-14자로 맞춰주세요.";
+			}
+
+			else if(4 > map_user["nick"].size() || 14 < map_user["nick"].size()){
+				packet << PROTOCOL_REGISTER_FAIL << "닉네임을 4-14자로 맞춰주세요.";
 			}
 
 			else{
-				packet<<PROTOCOL_REGISTER_SUCCESS;
-				user us = {map_user["id"], map_user["pw"], map_user["nick"], 1200, 1200, 0, 0, 0};
-				users.push_back(us);
+				vector<string> result_id;
+				vector<string> result_nick;
+				m_mysql.result(stringf("SELECT `id` FROM `user` where `id` = '%s'", map_user["id"].c_str()).c_str(), result_id);
+				m_mysql.result(stringf("SELECT `nick` FROM `user` where `nick` = '%s'", map_user["nick"].c_str()).c_str(), result_nick);
+
+				if(result_id.size() != 0){
+					packet << PROTOCOL_REGISTER_FAIL << "이미 존재하는 아이디 입니다.";
+				}
+
+				else if(result_nick.size() != 0){
+					packet << PROTOCOL_REGISTER_FAIL << "이미 존재하는 닉네임 입니다.";
+				}
+
+				else{
+					m_mysql.insert("user", map_user);
+
+					if(m_mysql.getErrno() != 0){
+						m_file_log << stringf("mysqlserver query failed")<<endl;
+						m_file_log << stringf(m_mysql.getError())<<endl;
+						packet<<PROTOCOL_REGISTER_FAIL;
+					}
+
+					else{
+						packet<<PROTOCOL_REGISTER_SUCCESS;
+					}
+				}
 			}
 
 				
@@ -294,25 +276,8 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 
 	case Protocol::LOGOUT:
 		{
-			string id;
-			int flag=0;
 
-			packet >> id;
-
-			packet.clear();
-			
-			for(auto it = users.begin(); it != users.end(); it++)
-				if(it->id==id){
-					it->login=0;
-					flag=1;
-				}
-
-			if(!flag) packet << "error: can't find ID";
-			else packet << "logout complete.";
-
-			this->async_send((ClientData*) client_data, packet);
-
-			
+			m_users.remove(client->m_user);
 
 			break;
 		}
@@ -348,15 +313,18 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 					}
 			
 			char Temp[30]="";
-			int gofor = size<=10?size:10;
+			int32_t gofor = size<=10?size:10;
 
+			packet.clear();
+			packet<<gofor;
 			for(int i=0; i<gofor; i++){
-				sprintf(Temp, "%s - %d\n",  nick[i].c_str(), tot[i]);
-				rank+=(Temp);
+				//sprintf(Temp, "%s - %d\n",  nick[i].c_str(), tot[i]);
+				//rank+=(Temp);
+				packet<<nick[i]<<tot[i];
 			}
 			
-			packet.clear();
-			packet << rank;
+			//packet.clear();
+			//packet << rank;
 			delete[] tot;
 			this->async_send((ClientData*) client_data, packet);
 
@@ -397,15 +365,18 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 					}
 			
 			char Temp[30]="";
-			int gofor = size<=10?size:10;
+			int32_t gofor = size<=10?size:10;
+			packet.clear();
+			packet << gofor;
 
 			for(int i=0; i<gofor; i++){
-				sprintf(Temp, "%s - %d\n",  nick[i].c_str(), win[i]);
-				rank+=(Temp);
+				//sprintf(Temp, "%s - %d\n",  nick[i].c_str(), win[i]);
+				//rank+=(Temp);
+				packet<<nick[i]<<win[i];
 			}
 			
-			packet.clear();
-			packet << rank;
+			//packet.clear();
+			//packet << rank;
 			delete[] win;
 			this->async_send((ClientData*) client_data, packet);
 			
@@ -466,7 +437,7 @@ void FourCardServer::onRead(const ClientData* client_data, Packet& packet)
 			packet >> temp;
 
 			packet.clear();
-			packet<<"9.0";
+			packet<<100;
 
 			this->async_send((ClientData*) client_data, packet);
 			break;
