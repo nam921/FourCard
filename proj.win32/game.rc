@@ -62,7 +62,7 @@ VS_VERSION_INFO VERSIONINFO
  FILETYPE 0x2L
  FILESUBTYPE 0x0L
 BEGIN
-    BLOCK "StringFileInfo"
+    BLOCK "stringfileInfo"
     BEGIN
         BLOCK "040904B0"
         BEGIN

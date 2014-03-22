@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "LoginScene.h"
-#include "FourCard.h"
+#include <thread>
 
 USING_NS_CC;
 
@@ -10,7 +10,8 @@ AppDelegate::AppDelegate() {
 
 AppDelegate::~AppDelegate() 
 {
-	FourCard::Release();
+	FourCardClient::getInstance()->disconnect();
+	FourCardClient::destroyInstance();
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
@@ -30,8 +31,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	director->setDepthTest(false);
 
 	eglView->setDesignResolutionSize(480, 800, ResolutionPolicy::SHOW_ALL);
-
-	FourCard::Initialize();
 
     // create a scene. it's an autorelease object
     auto scene = LoginScene::createScene();
