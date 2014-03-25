@@ -51,12 +51,6 @@ void main()
 				break;
 			}
 
-			if(id == 0) {
-				int32_t awr;
-				cout << "결과를 받으시것습니까? (1: 받, 0: 안받)";
-				cin >> awr;
-				packet << awr;
-			}
 
 			cin.ignore();
 

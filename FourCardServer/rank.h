@@ -3,6 +3,5 @@
 #pragma once
 struct Rank{
 	string nickname;
-	int win;
-	int lose;
+	string content;
 };
